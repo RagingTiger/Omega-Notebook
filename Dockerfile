@@ -8,7 +8,8 @@ RUN mamba install --yes \
     'ipynbname=2021.3.2' \
     'nashpy=0.0.35' \
     'pipreqsnb=0.2.4' \
-    'python-graphviz=0.20.1'&& \
+    'python-graphviz=0.20.1' \
+    'scikit-surprise=1.1.3' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
