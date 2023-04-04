@@ -1,5 +1,5 @@
 # jupyter base image
-FROM jupyter/tensorflow-notebook:lab-3.6.1
+FROM jupyter/tensorflow-notebook:lab-3.6.3
 
 # install python libraries
 RUN mamba install --yes \
