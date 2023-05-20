@@ -7,7 +7,7 @@ name: Docker
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "experimental" ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
@@ -74,10 +74,11 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}-gpu
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          target: gpu-enabled
 
 
       # Sign the resulting Docker image digest except on PRs.

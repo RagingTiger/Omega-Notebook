@@ -1,5 +1,5 @@
 # jupyter base image
-FROM jupyter/tensorflow-notebook:lab-3.6.3
+FROM jupyter/scipy-notebook:lab-3.6.3 as cpu-only
 
 # install python libraries
 RUN mamba install --yes \
@@ -15,4 +15,16 @@ RUN mamba install --yes \
     'scikit-surprise=1.1.3' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+    fix-permissions "/home/${NB_USER}" && \
+  pip install tensorflow==2.12.*
+
+# additional GPU-enabled steps
+FROM cpu-only as gpu-enabled
+
+# install CUDA tools
+RUN mamba install -c conda-forge cudatoolkit=11.8.0 && \
+  pip install nvidia-cudnn-cu11==8.6.0.163
+
+# setting up cuda library path
+RUN CUDNN_PATH=$(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)")) && \
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib
