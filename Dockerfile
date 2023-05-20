@@ -15,8 +15,10 @@ RUN mamba install --yes \
     'scikit-surprise=1.1.3' && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}" && \
-  pip install tensorflow==2.12.*
+    fix-permissions "/home/${NB_USER}"
+
+# install separate pip libraries
+RUN pip install tensorflow==2.12.*
 
 # additional GPU-enabled steps
 FROM cpu-only as gpu-enabled
@@ -25,10 +27,11 @@ FROM cpu-only as gpu-enabled
 RUN mamba install -c conda-forge cudatoolkit=11.8.0 && \
     mamba clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}" && \
-  pip install nvidia-cudnn-cu11==8.6.0.163
+    fix-permissions "/home/${NB_USER}"
 
-# setting up cuda library path
-RUN CUDNN_PATH=$(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)")) && \
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_DIR/lib/:$CUDNN_PATH/lib && \
-    echo "CUDA library path set to: ${LD_LIBRARY_PATH}"
+# install separate pip libraries
+RUN pip install nvidia-cudnn-cu11==8.6.0.163
+
+# setting up CUDA library path
+ARG PYTHON_VERSION=python3.1
+ENV LD_LIBRARY_PATH=${CONDA_DIR}/lib/:${CONDA_DIR}/lib/${PYTHON_VERSION}/site-packages/nvidia/cudnn/lib'
