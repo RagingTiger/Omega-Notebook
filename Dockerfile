@@ -34,4 +34,4 @@ RUN pip install nvidia-cudnn-cu11==8.6.0.163
 
 # setting up CUDA library path
 ARG PYTHON_VERSION=python3.1
-ENV LD_LIBRARY_PATH=${CONDA_DIR}/lib/:${CONDA_DIR}/lib/${PYTHON_VERSION}/site-packages/nvidia/cudnn/lib'
+ENV LD_LIBRARY_PATH=${CONDA_DIR}/lib/:${CONDA_DIR}/lib/${PYTHON_VERSION}/site-packages/nvidia/cudnn/lib
