@@ -39,3 +39,6 @@ RUN export CUDNN_PATH=$(dirname \
 
 # setting dynamic link lib paths
 ENV LD_LIBRARY_PATH=${CONDA_DIR}/lib/:${CONDA_DIR}/lib/cudnn.ln/lib
+
+# host NVIDIA driver minimum version metadata
+LABEL nvidia.driver.minimum_version="450.80.02"
