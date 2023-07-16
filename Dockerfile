@@ -18,7 +18,9 @@ RUN mamba install --yes \
     fix-permissions "/home/${NB_USER}"
 
 # install separate pip libraries
-RUN pip install tensorflow==2.12.*
+RUN pip install \
+    getdaft==0.1.8 \  
+    tensorflow==2.12.*
 
 # additional GPU-enabled steps
 FROM cpu-only as gpu-enabled
