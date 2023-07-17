@@ -19,7 +19,8 @@ RUN mamba install --yes \
 
 # install separate pip libraries
 RUN pip install \
-    getdaft==0.1.8 \  
+    getdaft==0.1.8 \
+    qbstyles==0.1.4 \
     tensorflow==2.12.*
 
 # additional GPU-enabled steps
