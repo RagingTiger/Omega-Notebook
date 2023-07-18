@@ -19,6 +19,7 @@ RUN mamba install --yes \
 
 # install separate pip libraries
 RUN pip install \
+    cleanvision==0.3.2 \
     getdaft==0.1.8 \
     qbstyles==0.1.4 \
     tensorflow==2.12.*
