@@ -9,7 +9,7 @@ RUN mamba install --yes \
     'graphviz=7.1.0' \
     'ipynbname=2021.3.2' \
     'nashpy=0.0.35' \
-    'osmnx=1.3.0' \
+    'osmnx=1.6.0' \
     'pipreqsnb=0.2.4' \
     'python-graphviz=0.20.1' \
     'scikit-surprise=1.1.3' && \
