@@ -1,5 +1,5 @@
 # jupyter base image
-FROM jupyter/scipy-notebook:lab-3.6.3 as cpu-only
+FROM jupyter/scipy-notebook:lab-4.0.5 as cpu-only
 
 # install python libraries
 RUN mamba install --yes \
